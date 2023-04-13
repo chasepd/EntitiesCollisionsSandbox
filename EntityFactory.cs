@@ -25,7 +25,7 @@ namespace EntitiesCollisionsSandbox
             _graphicsDevice = graphicsDevice;
         }
 
-        public Entity CreateFire(Vector2 Position)
+        public Entity CreateFire(Vector2 position)
         {
             var fireTexture = new Texture2D(_graphicsDevice, 1, 1);
                         
@@ -38,32 +38,40 @@ namespace EntitiesCollisionsSandbox
 
             var entity = _world.CreateEntity();
             entity.Attach(fireTexture);
-            entity.Attach(new FireBody(Position));
+            entity.Attach(new Body { Position = position, Size = new Vector2(GameState.ParticleSize, GameState.ParticleSize), BodyType = BodyType.Dynamic });
             entity.Attach(new Fire() { Temperature = GameState.FireTemperature });
             return entity;
         }
 
-        public Entity CreateWater(Vector2 Position) 
+        public Entity CreateWater(Vector2 position) 
         {
             var waterTexture = new Texture2D(_graphicsDevice, 1, 1);
             waterTexture.SetData(new Color[] { Color.CornflowerBlue });
 
             var entity = _world.CreateEntity();
             entity.Attach(waterTexture);
-            entity.Attach(new WaterBody(Position));
+            entity.Attach(new Body { Position = position, Size = new Vector2(GameState.ParticleSize, GameState.ParticleSize), BodyType = BodyType.Dynamic });
             entity.Attach(new Water() { Temperature = GameState.WaterTemperature });
             return entity;
         }
 
-        public Entity CreateSand(Vector2 Position) 
+        public Entity CreateSand(Vector2 position) 
         { 
             var sandTexture = new Texture2D(_graphicsDevice, 1, 1);
             sandTexture.SetData(new Color[] {Color.Tan});
 
             var entity = _world.CreateEntity();
             entity.Attach(sandTexture);
-            entity.Attach(new SandBody(Position));
+            entity.Attach(new Body { Position = position, Size = new Vector2(GameState.ParticleSize, GameState.ParticleSize), BodyType = BodyType.Dynamic });
             entity.Attach(new Sand() { Temperature = GameState.SandTemperature });
+            return entity;
+        }
+
+        public Entity CreateBottomBoundary()
+        {
+            var entity = _world.CreateEntity();
+            entity.Attach(new Body { Position = new Vector2(-1000, _graphicsDevice.Viewport.Height + 5000), Size = new Vector2(10000 , 10000), BodyType = BodyType.Static });
+
             return entity;
         }
     }

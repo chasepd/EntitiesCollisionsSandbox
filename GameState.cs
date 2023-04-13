@@ -11,5 +11,6 @@ namespace EntitiesCollisionsSandbox
         public static double FireTemperature { get; set; }
         public const double WaterTemperature = 20;
         public const double SandTemperature = 20;
+        public const int ParticleSize = 10;
     }
 }

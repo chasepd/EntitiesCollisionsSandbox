@@ -39,7 +39,7 @@ namespace EntitiesCollisionsSandbox.Systems
 
                 _spriteBatch.Draw(
                     texture,
-                    new Rectangle((int)body.Position.X, (int)body.Position.Y, 1, 1),
+                    new Rectangle((int)body.Position.X, (int)body.Position.Y, GameState.ParticleSize, GameState.ParticleSize),
                     Color.White
                     );
             }

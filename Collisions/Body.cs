@@ -1,26 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EntitiesCollisionsSandbox.Collisions
 {
-    internal abstract class Body : ICollisionActor
+    public enum BodyType
     {
-        public IShapeF Bounds => new RectangleF(Position.X, Position.Y, 1, 1);
+        Static, Dynamic
+    }
+
+    public class Body
+    {
+        public BodyType BodyType = BodyType.Static;
         public Vector2 Position;
         public Vector2 Velocity;
-
-        public Body(Vector2 position) 
-        {
-            Position = position;
-            Velocity = Vector2.Zero;
-        }
-
-        public abstract void OnCollision(CollisionEventArgs collisionData);
+        public AxisAlignedBoundingBox BoundingBox => new AxisAlignedBoundingBox(Position - Size / 2f, Position + Size / 2f);
+        public Vector2 Size;
     }
 }
